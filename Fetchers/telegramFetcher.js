@@ -48,7 +48,7 @@ module.exports = {
         try {
           messageObject.picture = $(this).find('.tgme_widget_message_photo_wrap').attr('style').split("('")[1].split("'")[0];
           if (messageObject.picture) {
-            const result = await cloudinary.uploader.upload(messageObject.picture, { public_id: messageObject.messageId });
+            const result = await cloudinary.uploader.upload(messageObject.picture, { public_id: `${messageObject.messageId}-picture` });
             messageObject.picture = result.url;
           }
         } catch (e) {}
@@ -56,7 +56,7 @@ module.exports = {
         try {
           messageObject.video = $(this).find('.tgme_widget_message_video').attr('src');
           if (messageObject.video) {
-            const result = await cloudinary.uploader.upload(messageObject.video, { public_id: messageObject.messageId });
+            const result = await cloudinary.uploader.upload(messageObject.video, { public_id: `${messageObject.messageId}-video` });
             messageObject.video = result.url;
           }
         } catch (e) {}
