@@ -12,11 +12,10 @@ const twitterPostSchema = new Schema(
     authorUsername: String,
     authorDisplayName: String,
     profileImage: String,
+    epochTime: Number,
   },
   {
-    timestamps: {
-      currentTime: () => Date.now(),
-    },
+    timestamps: false,
   }
 );
 

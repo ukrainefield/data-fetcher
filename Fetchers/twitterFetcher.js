@@ -2,9 +2,11 @@ const { TwitterApi } = require('twitter-api-v2');
 const { TWITTER_PROFILES } = require('../consts');
 const twitterClient = new TwitterApi(process.env.TWITTER_APP_USER_TOKEN);
 const postMessage = require('../MessagePost/postMessage');
+const log = require('fancy-log');
 
 module.exports = {
   execute: async function () {
+    log.info('Fetching Twitter data');
     TWITTER_PROFILES.forEach(async profile => {
       const timeline = await twitterClient.v1.userTimeline(profile.userID, {
         expansions: ['attachments.media_keys'],
@@ -45,7 +47,7 @@ function getImageUrls(tweet) {
       }
     });
   }
-  if (imageUrls.length == 0) {
+  if (imageUrls.length == 0 && tweet.entities.media) {
     imageUrls = tweet.entities.media.map(media => media.media_url_https);
   }
   return imageUrls;

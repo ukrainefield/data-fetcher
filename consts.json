@@ -5,6 +5,12 @@
       "username": "UAWeapons",
       "friendlyName": "🇺🇦 Ukraine Weapons Tracker",
       "onlyPostWithMedia": true
+    },
+    {
+      "userID": "1891490382",
+      "username": "nexta_tv",
+      "friendlyName": "🇺🇦NEXTA",
+      "onlyPostWithMedia": false
     }
   ]
 }
