@@ -13,4 +13,8 @@ async function postTwitterMessage(message, forceSend = false) {
   databasePost.postTwitterMessageToDatabase(message);
 }
 
-module.exports = { postTwitterMessage };
+async function postTelegramMessage(message, forceSend = false) {
+  console.log(message);
+}
+
+module.exports = { postTwitterMessage, postTelegramMessage };

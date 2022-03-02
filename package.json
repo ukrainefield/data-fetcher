@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/ukrainefield/data-fetcher#readme",
   "dependencies": {
+    "axios": "^0.26.0",
+    "cheerio": "^1.0.0-rc.10",
     "dotenv": "^16.0.0",
     "fancy-log": "^2.0.0",
     "mongoose": "^6.2.4",

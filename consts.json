@@ -4,13 +4,23 @@
       "userID": "1495480590572961792",
       "username": "UAWeapons",
       "friendlyName": "🇺🇦 Ukraine Weapons Tracker",
-      "onlyPostWithMedia": true
+      "onlyPostWithMedia": true,
+      "categories": ["trustable", "ukraine"]
     },
     {
       "userID": "1891490382",
       "username": "nexta_tv",
-      "friendlyName": "🇺🇦NEXTA",
-      "onlyPostWithMedia": false
+      "friendlyName": "🇺🇦 NEXTA",
+      "onlyPostWithMedia": false,
+      "categories": ["trustable", "verified", "ukraine"]
+    }
+  ],
+  "TELEGRAM_CHANNELS": [
+    {
+      "channelURL": "https://t.me/s/insiderUKR",
+      "friendlyName": "🇺🇦 Insider Ukraine ",
+      "username": "insiderUKR",
+      "categories": ["trustable", "ukraine"]
     }
   ]
 }

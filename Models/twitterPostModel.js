@@ -5,6 +5,7 @@ const twitterPostSchema = new Schema(
   {
     created_at: String,
     tweetID: String,
+    tweetURL: String,
     full_text: String,
     images: Object,
     videos: Object,
@@ -12,6 +13,7 @@ const twitterPostSchema = new Schema(
     authorUsername: String,
     authorDisplayName: String,
     profileImage: String,
+    categories: Array,
     epochTime: Number,
   },
   {
