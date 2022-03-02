@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "format": "prettier --write \"**/*.{js,json,less,css,md,html}\"",
+    "format:check": "prettier --loglevel debug --check \"**/*.{js,json,less,css,md,html}\""
   },
   "repository": {
     "type": "git",
@@ -19,7 +21,9 @@
   "homepage": "https://github.com/ukrainefield/data-fetcher#readme",
   "dependencies": {
     "dotenv": "^16.0.0",
+    "fancy-log": "^2.0.0",
     "mongoose": "^6.2.4",
+    "prettier": "^2.5.1",
     "twitter-api-v2": "^1.11.0"
   }
 }
