@@ -24,6 +24,13 @@
       "username": "insiderUKR",
       "categories": ["trustable", "ukraine"],
       "shouldTranslate": true
+    },
+    {
+      "channelURL": "https://t.me/s/trtnarusskom",
+      "friendlyName": "🇺🇦 TRT",
+      "username": "trtnarusskom",
+      "categories": ["trustable", "ukraine"],
+      "shouldTranslate": true
     }
   ]
 }
