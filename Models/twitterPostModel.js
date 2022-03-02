@@ -3,9 +3,15 @@ const Schema = mongoose.Schema;
 
 const twitterPostSchema = new Schema(
   {
-    commandsRecieved: Number,
-    slashCommandsRecieved: Number,
-    messagesSent: Number,
+    created_at: String,
+    tweetID: String,
+    full_text: String,
+    images: Object,
+    videos: Object,
+    authorID: String,
+    authorUsername: String,
+    authorDisplayName: String,
+    profileImage: String,
   },
   {
     timestamps: {
@@ -14,4 +20,4 @@ const twitterPostSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model('botstat', botstatsSchema);
+module.exports = mongoose.model('twitterPost', twitterPostSchema);

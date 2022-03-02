@@ -13,6 +13,7 @@ module.exports = {
 
       for await (const tweet of timeline) {
         if (profile.onlyPostWithMedia && !hasMedia(tweet)) continue;
+
         const messageObject = {
           created_at: tweet.created_at,
           tweetID: tweet.id_str,
