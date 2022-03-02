@@ -8,7 +8,7 @@ const telegramPostSchema = new Schema(
     picture: String,
     video: String,
     text: String,
-    id: String,
+    messageId: { type: String, index: true },
     messageURL: String,
     categories: Array,
     time: String,

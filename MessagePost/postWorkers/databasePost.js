@@ -21,20 +21,20 @@ async function postTwitterMessageToDatabase(message) {
 }
 
 async function postTelegramMessageToDatabase(message) {
-  log.info(`Posting Telegram message: ${message.id} by ${message.user} to database`);
+  log.info(`Posting Telegram message: ${message.messageId} by ${message.user} to database`);
   const newPost = new telegramPostModel();
   newPost.user = message.user;
   newPost.authorName = message.authorName;
   newPost.picture = message.picture;
   newPost.video = message.video;
   newPost.text = message.text;
-  newPost.id = message.id;
+  newPost.messageId = message.messageId;
   newPost.messageURL = message.messageURL;
   newPost.categories = message.categories;
   newPost.time = message.time;
   newPost.epochTime = message.epochTime;
   await newPost.save();
-  log.info(`Posted message: ${message.id} to database`);
+  log.info(`Posted message: ${message.messageId} to database`);
 }
 
 module.exports = { postTwitterMessageToDatabase, postTelegramMessageToDatabase };

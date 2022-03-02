@@ -16,12 +16,12 @@ async function postTwitterMessage(message, forceSend = false) {
 
 async function postTelegramMessage(message, forceSend = false) {
   if (!forceSend) {
-    let existingPost = await telegramPostModel.findOne({ id: message.id });
+    let existingPost = await telegramPostModel.findOne({ messageId: message.messageId });
     if (existingPost) {
       return;
     }
   }
-  log.info(`Recieved Telegram message: ${message.id} by: ${message.user}`);
+  log.info(`Recieved Telegram message: ${message.messageId} by: ${message.user}`);
   databasePost.postTelegramMessageToDatabase(message);
 }
 

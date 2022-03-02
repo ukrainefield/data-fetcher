@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const twitterPostSchema = new Schema(
   {
     created_at: String,
-    tweetID: String,
+    tweetID: { type: String, index: true },
     tweetURL: String,
     full_text: String,
     images: Object,

@@ -25,13 +25,13 @@ module.exports = {
           picture: undefined,
           video: undefined,
           text: channel.shouldTranslate ? await translator.translateText(MessageText) : MessageText,
-          id: $(this).attr('data-post'),
+          messageId: $(this).attr('data-post'),
           messageURL: '',
           time: $(this).find('.time').attr('datetime'),
           epochTime: '',
           categories: channel.categories,
         };
-        messageObject.messageURL = `https://t.me/${messageObject.id}/`;
+        messageObject.messageURL = `https://t.me/${messageObject.messageId}/`;
 
         try {
           messageObject.epochTime = new Date(messageObject.time).getTime() / 1000;
