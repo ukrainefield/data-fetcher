@@ -9,35 +9,38 @@ module.exports = {
   execute: async function () {
     const currentEpoch = Math.round(new Date().getTime() / 1000);
     log.info('Fetching Twitter data');
+
     TWITTER_PROFILES.forEach(async profile => {
-      const timeline = await twitterClient.v1.userTimeline(profile.userID, {
-        expansions: ['attachments.media_keys'],
-        'media.fields': ['url'],
-      });
+      try {
+        const timeline = await twitterClient.v1.userTimeline(profile.userID, {
+          expansions: ['attachments.media_keys'],
+          'media.fields': ['url'],
+        });
 
-      for await (const tweet of timeline) {
-        if (profile.onlyPostWithMedia && !hasMedia(tweet)) continue;
+        for await (const tweet of timeline) {
+          if (profile.onlyPostWithMedia && !hasMedia(tweet)) continue;
 
-        //Don't fetch tweets that are older than 5 days
-        const tweetEpoch = new Date(tweet.created_at).getTime() / 1000;
-        if (currentEpoch - tweetEpoch > 60 * 60 * 24 * 5) continue;
+          //Don't fetch tweets that are older than 5 days
+          const tweetEpoch = new Date(tweet.created_at).getTime() / 1000;
+          if (currentEpoch - tweetEpoch > 60 * 60 * 24 * 5) continue;
 
-        const messageObject = {
-          created_at: tweet.created_at,
-          tweetID: tweet.id_str,
-          tweetURL: `https://twitter.com/${tweet.user.id_str}/status/${tweet.id_str}`,
-          full_text: profile.shouldTranslate ? translator.translateText(tweet.full_text) : tweet.full_text,
-          images: getImageUrls(tweet),
-          videos: getVideoUrls(tweet.extended_entities),
-          authorID: tweet.user.id_str,
-          authorUsername: tweet.user.screen_name,
-          authorDisplayName: tweet.user.name,
-          profileImage: tweet.user.profile_image_url_https,
-          categories: profile.categories,
-          epochTime: tweetEpoch,
-        };
-        postMessage.postTwitterMessage(messageObject);
-      }
+          const messageObject = {
+            created_at: tweet.created_at,
+            tweetID: tweet.id_str,
+            tweetURL: `https://twitter.com/${tweet.user.id_str}/status/${tweet.id_str}`,
+            full_text: profile.shouldTranslate ? translator.translateText(tweet.full_text) : tweet.full_text,
+            images: getImageUrls(tweet),
+            videos: getVideoUrls(tweet.extended_entities),
+            authorID: tweet.user.id_str,
+            authorUsername: tweet.user.screen_name,
+            authorDisplayName: tweet.user.name,
+            profileImage: tweet.user.profile_image_url_https,
+            categories: profile.categories,
+            epochTime: tweetEpoch,
+          };
+          postMessage.postTwitterMessage(messageObject);
+        }
+      } catch (e) {}
     });
   },
   time: 1000 * 60,

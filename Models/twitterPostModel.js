@@ -14,7 +14,7 @@ const twitterPostSchema = new Schema(
     authorDisplayName: String,
     profileImage: String,
     categories: Array,
-    epochTime: Number,
+    epochTime: { type: Number, index: true },
   },
   {
     timestamps: false,

@@ -12,7 +12,7 @@ const telegramPostSchema = new Schema(
     messageURL: String,
     categories: Array,
     time: String,
-    epochTime: Number,
+    epochTime: { type: Number, index: true },
   },
   {
     timestamps: false,
