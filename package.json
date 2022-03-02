@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/ukrainefield/data-fetcher#readme",
   "dependencies": {
+    "@vitalets/google-translate-api": "^8.0.0",
     "axios": "^0.26.0",
     "cheerio": "^1.0.0-rc.10",
     "dotenv": "^16.0.0",

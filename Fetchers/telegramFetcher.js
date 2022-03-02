@@ -3,6 +3,7 @@ const cheerio = require('cheerio');
 const axios = require('axios').default;
 const { TELEGRAM_CHANNELS } = require('../consts');
 const postMessage = require('../MessagePost/postMessage');
+const translator = require('../Helpers/translator');
 
 module.exports = {
   execute: async function () {
@@ -11,13 +12,19 @@ module.exports = {
       const data = await axios.post(channel.channelURL);
       const $ = cheerio.load(data.data);
 
-      $('.tgme_widget_message').each(function () {
+      $('.tgme_widget_message').each(async function () {
+        let MessageText = $(this).find('.tgme_widget_message_text').text();
+
+        if (MessageText.includes('| Subscribe')) {
+          MessageText = MessageText.split('| Subscribe')[0];
+        }
+
         let messageObject = {
           user: channel.username ?? $(this).find('.tgme_widget_message_user').find('a').attr('href'),
           authorName: $(this).find('.tgme_widget_message_owner_name').find('span').text(),
           picture: undefined,
           video: undefined,
-          text: $(this).find('.tgme_widget_message_text').text(),
+          text: channel.shouldTranslate ? await translator.translateText(MessageText) : MessageText,
           id: $(this).attr('data-post'),
           messageURL: '',
           time: $(this).find('.time').attr('datetime'),

@@ -3,6 +3,7 @@ const { TWITTER_PROFILES } = require('../consts');
 const twitterClient = new TwitterApi(process.env.TWITTER_APP_USER_TOKEN);
 const postMessage = require('../MessagePost/postMessage');
 const log = require('fancy-log');
+const translator = require('../Helpers/translator');
 
 module.exports = {
   execute: async function () {
@@ -20,7 +21,7 @@ module.exports = {
           created_at: tweet.created_at,
           tweetID: tweet.id_str,
           tweetURL: `https://twitter.com/${tweet.user.id_str}/status/${tweet.id_str}`,
-          full_text: tweet.full_text,
+          full_text: profile.shouldTranslate ? translator.translateText(tweet.full_text) : tweet.full_text,
           images: getImageUrls(tweet),
           videos: getVideoUrls(tweet.extended_entities),
           authorID: tweet.user.id_str,
