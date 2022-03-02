@@ -1,6 +1,7 @@
 const databasePost = require('./postWorkers/databasePost');
 const log = require('fancy-log');
 const twitterPostModel = require('../Models/twitterPostModel');
+const telegramPostModel = require('../Models/telegramPostModel');
 
 async function postTwitterMessage(message, forceSend = false) {
   if (!forceSend) {
@@ -14,7 +15,14 @@ async function postTwitterMessage(message, forceSend = false) {
 }
 
 async function postTelegramMessage(message, forceSend = false) {
-  console.log(message);
+  if (!forceSend) {
+    let existingPost = await telegramPostModel.findOne({ id: message.id });
+    if (existingPost) {
+      return;
+    }
+  }
+  log.info(`Recieved Telegram message: ${message.id} by: ${message.user}`);
+  databasePost.postTelegramMessageToDatabase(message);
 }
 
 module.exports = { postTwitterMessage, postTelegramMessage };

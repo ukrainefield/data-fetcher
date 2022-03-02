@@ -19,6 +19,7 @@ module.exports = {
         const messageObject = {
           created_at: tweet.created_at,
           tweetID: tweet.id_str,
+          tweetURL: `https://twitter.com/${tweet.user.id_str}/status/${tweet.id_str}`,
           full_text: tweet.full_text,
           images: getImageUrls(tweet),
           videos: getVideoUrls(tweet.extended_entities),
@@ -26,6 +27,8 @@ module.exports = {
           authorUsername: tweet.user.screen_name,
           authorDisplayName: tweet.user.name,
           profileImage: tweet.user.profile_image_url_https,
+          categories: profile.categories,
+          epochTime: new Date(tweet.created_at).getTime() / 1000,
         };
         postMessage.postTwitterMessage(messageObject);
       }

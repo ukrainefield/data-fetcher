@@ -1,8 +1,9 @@
 const log = require('fancy-log');
 const twitterPostModel = require('../../Models/twitterPostModel');
+const telegramPostModel = require('../../Models/telegramPostModel');
 
 async function postTwitterMessageToDatabase(message) {
-  log.info(`Posting message: ${message.tweetID} by ${message.authorUsername} to database`);
+  log.info(`Posting Tweet message: ${message.tweetID} by ${message.authorUsername} to database`);
   const newPost = new twitterPostModel();
   newPost.created_at = message.created_at;
   newPost.tweetID = message.tweetID;
@@ -19,4 +20,21 @@ async function postTwitterMessageToDatabase(message) {
   log.info(`Posted message: ${message.tweetID} to database`);
 }
 
-module.exports = { postTwitterMessageToDatabase };
+async function postTelegramMessageToDatabase(message) {
+  log.info(`Posting Telegram message: ${message.id} by ${message.user} to database`);
+  const newPost = new telegramPostModel();
+  newPost.user = message.user;
+  newPost.authorName = message.authorName;
+  newPost.picture = message.picture;
+  newPost.video = message.video;
+  newPost.text = message.text;
+  newPost.id = message.id;
+  newPost.messageURL = message.messageURL;
+  newPost.categories = message.categories;
+  newPost.time = message.time;
+  newPost.epochTime = message.epochTime;
+  await newPost.save();
+  log.info(`Posted message: ${message.id} to database`);
+}
+
+module.exports = { postTwitterMessageToDatabase, postTelegramMessageToDatabase };

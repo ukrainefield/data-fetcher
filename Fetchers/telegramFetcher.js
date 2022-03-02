@@ -22,6 +22,7 @@ module.exports = {
           messageURL: '',
           time: $(this).find('.time').attr('datetime'),
           epochTime: '',
+          categories: channel.categories,
         };
         messageObject.messageURL = `https://t.me/${messageObject.id}/`;
 
