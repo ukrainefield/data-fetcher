@@ -15,6 +15,14 @@
       "onlyPostWithMedia": false,
       "categories": ["trustable", "verified", "ukraine"],
       "shouldTranslate": false
+    },
+    {
+      "userID": "1496784000773459971",
+      "username": "UA_BotTwitte",
+      "friendlyName": "🇺🇦 Verified Live Updates",
+      "onlyPostWithMedia": true,
+      "categories": ["trustable", "verified", "ukraine"],
+      "shouldTranslate": false
     }
   ],
   "TELEGRAM_CHANNELS": [
