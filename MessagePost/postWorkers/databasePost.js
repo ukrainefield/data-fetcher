@@ -2,7 +2,7 @@ const log = require('fancy-log');
 const twitterPostModel = require('../Models/twitterPostModel');
 
 async function postTwitterMessageToDatabase(message) {
-  log.info(`Posting message: ${message.tweetID} to database`);
+  log.info(`Posting message: ${message.tweetID} by ${message.authorUsername} to database`);
   const newPost = new twitterPostModel();
   newPost.created_at = message.created_at;
   newPost.tweetID = message.tweetID;

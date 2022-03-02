@@ -1,4 +1,4 @@
-const databasePost = require('./databasePost');
+const databasePost = require('./postWorkers/databasePost');
 const log = require('fancy-log');
 const twitterPostModel = require('../Models/twitterPostModel');
 
