@@ -21,12 +21,13 @@
   "homepage": "https://github.com/ukrainefield/data-fetcher#readme",
   "dependencies": {
     "@vitalets/google-translate-api": "^8.0.0",
+    "aws-sdk": "^2.1085.0",
     "axios": "^0.26.0",
     "cheerio": "^1.0.0-rc.10",
-    "cloudinary": "^1.28.1",
     "dotenv": "^16.0.0",
     "fancy-log": "^2.0.0",
     "mongoose": "^6.2.4",
+    "nodejs-file-downloader": "^4.9.3",
     "prettier": "^2.5.1",
     "twitter-api-v2": "^1.11.0"
   }

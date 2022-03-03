@@ -1,15 +1,13 @@
 const log = require('fancy-log');
 const cheerio = require('cheerio');
 const axios = require('axios').default;
-const { TELEGRAM_CHANNELS } = require('../consts');
+const { TELEGRAM_CHANNELS, MEDIA_DIR } = require('../consts');
 const postMessage = require('../MessagePost/postMessage');
 const translator = require('../Helpers/translator');
-const cloudinary = require('cloudinary').v2;
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+const fs = require('fs');
+const path = require('path');
+const Downloader = require('nodejs-file-downloader');
+const fileUpload = require('../Helpers/fileUploader');
 
 module.exports = {
   execute: async function () {
@@ -49,21 +47,27 @@ module.exports = {
         try {
           messageObject.picture = $(this).find('.tgme_widget_message_photo_wrap').attr('style').split("('")[1].split("'")[0];
           if (messageObject.picture) {
-            const result = await cloudinary.uploader.upload(messageObject.picture, { public_id: `${messageObject.messageId}-picture` });
-            messageObject.picture = result.url;
+            const fileName = `${messageObject.messageId.split('/')[0]}-${messageObject.messageId.split('/')[1]}-image.jpg`;
+            const result = await downloadAndUpload(messageObject.picture, fileName, 'picture');
+            if (result) {
+              messageObject.picture = result.Location;
+            }
           }
         } catch (e) {}
 
         try {
           messageObject.video = $(this).find('.tgme_widget_message_video').attr('src');
           if (messageObject.video) {
-            const result = await cloudinary.uploader.upload(messageObject.video, {
-              public_id: `${messageObject.messageId}-video`,
-              resource_type: 'video',
-            });
-            messageObject.video = result.url;
+            const fileName = `${messageObject.messageId.split('/')[0]}-${messageObject.messageId.split('/')[1]}-video.mp4`;
+
+            const result = await downloadAndUpload(messageObject.video, fileName, 'video');
+            if (result) {
+              messageObject.video = result.Location;
+            }
           }
-        } catch (e) {}
+        } catch (e) {
+          log.info(e);
+        }
 
         postMessage.postTelegramMessage(messageObject);
       });
@@ -71,3 +75,24 @@ module.exports = {
   },
   time: 1000 * 60,
 };
+
+async function downloadAndUpload(url, fileName, type) {
+  try {
+    const downloader = new Downloader({
+      url: url,
+      directory: path.join(__dirname, '..', MEDIA_DIR),
+      fileName: fileName,
+    });
+    await downloader.download();
+
+    const result = await fileUpload.uploadFile(path.join(__dirname, '..', MEDIA_DIR, fileName), fileName, type);
+    try {
+      fs.unlinkSync(path.join(__dirname, '..', MEDIA_DIR, fileName));
+    } catch (e) {
+      log.info(e);
+    }
+    return result;
+  } catch (e) {
+    return null;
+  }
+}
