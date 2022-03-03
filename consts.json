@@ -24,6 +24,30 @@
       "onlyPostWithMedia": true,
       "categories": ["trustable", "verified", "ukraine"],
       "shouldTranslate": false
+    },
+    {
+      "userID": "1120633726478823425",
+      "username": "ZelenskyyUa",
+      "friendlyName": "🇺🇦 Zelensky",
+      "onlyPostWithMedia": false,
+      "categories": ["trustable", "verified", "ukraine"],
+      "shouldTranslate": true
+    },
+    {
+      "userID": "1462548977367359490",
+      "username": "KyivIndependent",
+      "friendlyName": "🇺🇦 The Kyiv Independent",
+      "onlyPostWithMedia": false,
+      "categories": ["trustable", "verified", "ukraine"],
+      "shouldTranslate": false
+    },
+    {
+      "userID": "14106476",
+      "username": "KyivPost",
+      "friendlyName": "🇺🇦 KyivPost",
+      "onlyPostWithMedia": false,
+      "categories": ["trustable", "verified", "ukraine"],
+      "shouldTranslate": false
     }
   ],
   "TELEGRAM_CHANNELS": [
