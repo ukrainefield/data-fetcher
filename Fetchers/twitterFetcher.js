@@ -19,7 +19,6 @@ module.exports = {
 
         for await (const tweet of timeline) {
           if (profile.onlyPostWithMedia && !hasMedia(tweet)) continue;
-
           //Don't fetch tweets that are older than 5 days
           const tweetEpoch = new Date(tweet.created_at).getTime() / 1000;
           if (currentEpoch - tweetEpoch > 60 * 60 * 24 * 5) continue;
@@ -33,7 +32,7 @@ module.exports = {
             videos: getVideoUrls(tweet.extended_entities),
             authorID: tweet.user.id_str,
             authorUsername: tweet.user.screen_name,
-            authorDisplayName: tweet.user.name,
+            authorDisplayName: profile.friendlyName ?? tweet.user.name,
             profileImage: tweet.user.profile_image_url_https,
             categories: profile.categories,
             epochTime: tweetEpoch,
