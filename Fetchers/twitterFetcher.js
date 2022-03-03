@@ -27,7 +27,7 @@ module.exports = {
             created_at: tweet.created_at,
             tweetID: tweet.id_str,
             tweetURL: `https://twitter.com/${tweet.user.id_str}/status/${tweet.id_str}`,
-            full_text: profile.shouldTranslate ? translator.translateText(tweet.full_text) : tweet.full_text,
+            full_text: profile.shouldTranslate ? await translator.translateText(tweet.full_text) : tweet.full_text,
             images: getImageUrls(tweet),
             videos: getVideoUrls(tweet.extended_entities),
             authorID: tweet.user.id_str,
