@@ -42,7 +42,7 @@ module.exports = {
       } catch (e) {}
     });
   },
-  time: 1000 * 60,
+  time: 1000 * 60 * 2,
 };
 
 function hasMedia(tweet) {
