@@ -1,6 +1,9 @@
 const aws = require('aws-sdk');
 const fs = require('fs');
+const path = require('path');
 const log = require('fancy-log');
+const Downloader = require('nodejs-file-downloader');
+const { MEDIA_DIR } = require('../consts.json');
 
 const { S3_ENDPOINT, BUCKET_NAME } = process.env;
 
@@ -28,4 +31,26 @@ async function uploadFile(filePath, fileName, type) {
   return myPromise;
 }
 
-module.exports = { s3, uploadFile };
+async function downloadAndUpload(url, fileName, type) {
+  try {
+    const downloader = new Downloader({
+      url: url,
+      directory: path.join(__dirname, '..', MEDIA_DIR),
+      fileName: fileName,
+    });
+    await downloader.download();
+
+    const result = await module.exports.uploadFile(path.join(__dirname, '..', MEDIA_DIR, fileName), fileName, type);
+    try {
+      fs.unlinkSync(path.join(__dirname, '..', MEDIA_DIR, fileName));
+    } catch (e) {
+      log.info(e);
+    }
+    return result;
+  } catch (e) {
+    log.info(e);
+    return null;
+  }
+}
+
+module.exports = { s3, uploadFile, downloadAndUpload };
