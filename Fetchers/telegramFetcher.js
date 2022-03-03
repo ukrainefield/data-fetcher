@@ -36,6 +36,7 @@ module.exports = {
           time: $(this).find('.time').attr('datetime'),
           epochTime: '',
           categories: channel.categories,
+          friendlyName: channel.friendlyName,
         };
         messageObject.messageURL = `https://t.me/${messageObject.messageId}/`;
 
@@ -56,7 +57,10 @@ module.exports = {
         try {
           messageObject.video = $(this).find('.tgme_widget_message_video').attr('src');
           if (messageObject.video) {
-            const result = await cloudinary.uploader.upload(messageObject.video, { public_id: `${messageObject.messageId}-video` });
+            const result = await cloudinary.uploader.upload(messageObject.video, {
+              public_id: `${messageObject.messageId}-video`,
+              resource_type: 'video',
+            });
             messageObject.video = result.url;
           }
         } catch (e) {}

@@ -24,7 +24,7 @@ async function postTelegramMessageToDatabase(message) {
   log.info(`Posting Telegram message: ${message.messageId} by ${message.user} to database`);
   const newPost = new telegramPostModel();
   newPost.user = message.user;
-  newPost.authorName = message.authorName;
+  newPost.authorName = message.friendlyName;
   newPost.picture = message.picture;
   newPost.video = message.video;
   newPost.text = message.text;
