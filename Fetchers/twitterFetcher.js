@@ -18,7 +18,6 @@ module.exports = {
           count: 50,
         });
 
-        console.log(timeline.length);
         for await (const tweet of timeline) {
           if (profile.onlyPostWithMedia && !hasMedia(tweet)) continue;
           //Don't fetch tweets that are older than 5 days
