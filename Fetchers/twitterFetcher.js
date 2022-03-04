@@ -43,11 +43,10 @@ module.exports = {
           postMessage.postTwitterMessage(messageObject);
         }
       } catch (e) {
-        console.log(e)
       }
     });
   },
-  time: 1000 * 60 * 2,
+  time: 1000 * 60 * 5,
 };
 
 function hasMedia(tweet) {
@@ -75,7 +74,6 @@ function getVideoUrls(extended_entities) {
   extended_entities.media.forEach(media => {
     if (media.type == 'video') {
       const videoMp4s = media.video_info.variants.filter(variant => variant.content_type == 'video/mp4').sort(variant => variant.bitrate);
-      console.log(videoMp4s);
       if (videoMp4s.length > 0) {
         videoUrls.push(videoMp4s[0].url);
       } else {
