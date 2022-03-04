@@ -15,8 +15,10 @@ module.exports = {
         const timeline = await twitterClient.v1.userTimeline(profile.userID, {
           expansions: ['attachments.media_keys'],
           'media.fields': ['url'],
+          count: 50,
         });
 
+        console.log(timeline.length);
         for await (const tweet of timeline) {
           if (profile.onlyPostWithMedia && !hasMedia(tweet)) continue;
           //Don't fetch tweets that are older than 5 days
@@ -42,8 +44,7 @@ module.exports = {
           }
           postMessage.postTwitterMessage(messageObject);
         }
-      } catch (e) {
-      }
+      } catch (e) {}
     });
   },
   time: 1000 * 60 * 5,
