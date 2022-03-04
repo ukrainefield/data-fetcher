@@ -42,7 +42,9 @@ module.exports = {
           }
           postMessage.postTwitterMessage(messageObject);
         }
-      } catch (e) {}
+      } catch (e) {
+        console.log(e)
+      }
     });
   },
   time: 1000 * 60 * 2,
@@ -72,7 +74,13 @@ function getVideoUrls(extended_entities) {
   let videoUrls = [];
   extended_entities.media.forEach(media => {
     if (media.type == 'video') {
-      videoUrls.push(media.video_info.variants[0].url);
+      const videoMp4s = media.video_info.variants.filter(variant => variant.content_type == 'video/mp4').sort(variant => variant.bitrate);
+      console.log(videoMp4s);
+      if (videoMp4s.length > 0) {
+        videoUrls.push(videoMp4s[0].url);
+      } else {
+        videoUrls.push(media.video_info.variants[0].url);
+      }
     }
   });
   return videoUrls;
