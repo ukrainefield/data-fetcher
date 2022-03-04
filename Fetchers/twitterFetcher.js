@@ -1,5 +1,5 @@
 const { TwitterApi } = require('twitter-api-v2');
-const { TWITTER_PROFILES } = require('../consts');
+const { TWITTER_PROFILES, ADDITIONAL_CATEGORIES } = require('../consts');
 const twitterClient = new TwitterApi(process.env.TWITTER_APP_USER_TOKEN);
 const postMessage = require('../MessagePost/postMessage');
 const log = require('fancy-log');
@@ -23,7 +23,7 @@ module.exports = {
           const tweetEpoch = new Date(tweet.created_at).getTime() / 1000;
           if (currentEpoch - tweetEpoch > 60 * 60 * 24 * 5) continue;
 
-          const messageObject = {
+          let messageObject = {
             created_at: tweet.created_at,
             tweetID: tweet.id_str,
             tweetURL: `https://twitter.com/${tweet.user.id_str}/status/${tweet.id_str}`,
@@ -37,6 +37,9 @@ module.exports = {
             categories: profile.categories,
             epochTime: tweetEpoch,
           };
+          if (tweet.possibly_sensitive) {
+            messageObject.categories.push(ADDITIONAL_CATEGORIES.NSFW);
+          }
           postMessage.postTwitterMessage(messageObject);
         }
       } catch (e) {}

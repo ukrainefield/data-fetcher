@@ -1,4 +1,7 @@
 {
+  "ADDITIONAL_CATEGORIES": {
+    "NSFW": "NSFW"
+  },
   "MEDIA_DIR": "media",
   "TWITTER_PROFILES": [
     {
