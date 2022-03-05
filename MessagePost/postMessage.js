@@ -2,7 +2,25 @@ const databasePost = require('./postWorkers/databasePost');
 const log = require('fancy-log');
 const twitterPostModel = require('../Models/twitterPostModel');
 const telegramPostModel = require('../Models/telegramPostModel');
+const reutersMapModel = require('../Models/reutersMapModel');
 const fileUpload = require('../Helpers/fileUploader');
+const fs = require('fs');
+
+async function postReutersMap(message, forceSend = false) {
+  if (!forceSend) {
+    let existingPost = await reutersMapModel.findOne({ epochTime: message.epochTime });
+    if (existingPost) {
+      try {
+        fs.unlinkSync(message.imagePath);
+      } catch (e) {}
+      return;
+    }
+  }
+  log.info(`Recieved Reuters map: ${message.displayUpdatedTime}`);
+  const uploadData = await fileUpload.uploadFile(message.imagePath, message.fileName, 'reutersMap');
+  message.imagePath = uploadData.Location;
+  databasePost.postReutersMapToDatabase(message);
+}
 
 async function postTwitterMessage(message, forceSend = false) {
   if (!forceSend) {
@@ -55,4 +73,4 @@ async function addMediaToTelegramMessage(messageObject) {
   return messageObject;
 }
 
-module.exports = { postTwitterMessage, postTelegramMessage };
+module.exports = { postTwitterMessage, postTelegramMessage, postReutersMap };

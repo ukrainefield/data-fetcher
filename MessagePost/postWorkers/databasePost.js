@@ -1,6 +1,7 @@
 const log = require('fancy-log');
 const twitterPostModel = require('../../Models/twitterPostModel');
 const telegramPostModel = require('../../Models/telegramPostModel');
+const reutersMapModel = require('../../Models/reutersMapModel');
 
 async function postTwitterMessageToDatabase(message) {
   log.info(`Posting Tweet message: ${message.tweetID} by ${message.authorUsername} to database`);
@@ -37,4 +38,17 @@ async function postTelegramMessageToDatabase(message) {
   log.info(`Posted message: ${message.messageId} to database`);
 }
 
-module.exports = { postTwitterMessageToDatabase, postTelegramMessageToDatabase };
+async function postReutersMapToDatabase(message) {
+  log.info(`Posting Reuters map: ${message.displayUpdatedTime} to database`);
+  console.log(message);
+  const newPost = new reutersMapModel();
+  newPost.imagePath = message.imagePath;
+  newPost.displayUpdatedTime = message.displayUpdatedTime;
+  newPost.messageText = message.messageText;
+  newPost.messageLink = message.messageLink;
+  newPost.epochTime = message.epochTime;
+  await newPost.save();
+  log.info(`Posted Reuters map: ${message.displayUpdatedTime} to database`);
+}
+
+module.exports = { postTwitterMessageToDatabase, postTelegramMessageToDatabase, postReutersMapToDatabase };

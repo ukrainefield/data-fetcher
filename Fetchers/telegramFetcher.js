@@ -5,8 +5,6 @@ const { TELEGRAM_CHANNELS, MEDIA_DIR } = require('../consts');
 const postMessage = require('../MessagePost/postMessage');
 const translator = require('../Helpers/translator');
 const fs = require('fs');
-const path = require('path');
-const fileUpload = require('../Helpers/fileUploader');
 
 module.exports = {
   execute: async function () {

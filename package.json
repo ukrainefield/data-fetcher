@@ -29,6 +29,7 @@
     "mongoose": "^6.2.4",
     "nodejs-file-downloader": "^4.9.3",
     "prettier": "^2.5.1",
+    "puppeteer": "^13.4.1",
     "twitter-api-v2": "^1.11.0"
   }
 }
