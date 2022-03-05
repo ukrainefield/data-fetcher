@@ -4,6 +4,7 @@
   },
   "REUTERS_MAP_PAGE": "https://graphics.reuters.com/UKRAINE-CRISIS/zdpxokdxzvx/",
   "MEDIA_DIR": "media",
+  "UPLOAD_TRIES": 3,
   "TWITTER_PROFILES": [
     {
       "userID": "1495480590572961792",
