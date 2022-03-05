@@ -1,12 +1,13 @@
 const puppeteer = require('puppeteer');
-const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const { MEDIA_DIR, REUTERS_MAP_PAGE } = require('../consts');
 const postMessage = require('../MessagePost/postMessage');
+const log = require('fancy-log');
 module.exports = {
   execute: async function () {
+    log.info('Fetching Reuters Ukraine map');
     const data = await axios.get(REUTERS_MAP_PAGE);
     const $ = cheerio.load(data.data);
 
