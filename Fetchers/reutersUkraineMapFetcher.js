@@ -35,14 +35,14 @@ async function getBigMap(date) {
   const imagePath = path.join(__dirname, '..', MEDIA_DIR, `reutersUkraineMap-${date}.png`);
   const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   const page = await browser.newPage();
-  await page.goto(REUTERS_MAP_PAGE);
   await page.setViewport({ width: 1920, height: 1080 });
+  await page.goto(REUTERS_MAP_PAGE, { waitUntil: 'load' });
   await page.waitForSelector('#g-bigmap-box');
   const element = await page.$('#g-bigmap-box');
   await element.screenshot({
     path: imagePath,
     type: 'jpeg',
-    quality: 70,
+    quality: 100,
   });
   browser.close();
   return imagePath;
