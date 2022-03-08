@@ -53,8 +53,16 @@ module.exports = {
         } catch (e) {}
 
         try {
+          $(this)
+            .find('.js-message_video')
+            .each(async function () {
+              messageObject.video.push($(this).attr('src'));
+            });
+        } catch (e) {}
+
+        try {
           const video = $(this).find('.tgme_widget_message_video').attr('src');
-          if (video) {
+          if (video && messageObject.video.length == 0) {
             messageObject.video.push(video);
           }
         } catch (e) {}
