@@ -50,7 +50,7 @@ async function addMediaToTelegramMessage(messageObject) {
   try {
     if (messageObject.picture) {
       let results = [];
-      messageObject.picture.map(async (picture, index) => {
+      await messageObject.picture.map(async (picture, index) => {
         try {
           let tries = 0;
           const fileName = `${messageObject.messageId.split('/')[0]}-${messageObject.messageId.split('/')[1]}-image-${index}.jpg`;
@@ -74,7 +74,7 @@ async function addMediaToTelegramMessage(messageObject) {
   try {
     if (messageObject.video) {
       let results = [];
-      messageObject.video.map(async (video, index) => {
+      await messageObject.video.map(async (video, index) => {
         try {
           const fileName = `${messageObject.messageId.split('/')[0]}-${messageObject.messageId.split('/')[1]}-video-${index}.mp4`;
           let tries = 0;
