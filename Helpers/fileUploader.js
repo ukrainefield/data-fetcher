@@ -48,7 +48,7 @@ async function downloadAndUpload(url, fileName, type) {
     }
     return result;
   } catch (e) {
-    log.info(e);
+    log.error(e);
     return null;
   }
 }
