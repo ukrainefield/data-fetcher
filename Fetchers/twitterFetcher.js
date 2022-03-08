@@ -24,7 +24,7 @@ module.exports = {
           const tweetEpoch = new Date(tweet.created_at).getTime() / 1000;
           if (currentEpoch - tweetEpoch > 60 * 60 * 24 * 5) continue;
 
-          var messageObject = {
+          let messageObject = {
             created_at: tweet.created_at,
             tweetID: tweet.id_str,
             tweetURL: `https://twitter.com/${tweet.user.id_str}/status/${tweet.id_str}`,
