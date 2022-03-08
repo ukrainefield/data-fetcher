@@ -23,8 +23,8 @@ module.exports = {
         let messageObject = {
           user: channel.username ?? $(this).find('.tgme_widget_message_user').find('a').attr('href'),
           authorName: $(this).find('.tgme_widget_message_owner_name').find('span').text(),
-          picture: undefined,
-          video: undefined,
+          picture: [],
+          video: [],
           text: channel.shouldTranslate ? await translator.translateText(MessageText) : MessageText,
           messageId: $(this).attr('data-post'),
           messageURL: '',
@@ -36,11 +36,25 @@ module.exports = {
         messageObject.messageURL = `https://t.me/${messageObject.messageId}/`;
 
         try {
-          messageObject.picture = $(this).find('.tgme_widget_message_photo_wrap').attr('style').split("('")[1].split("'")[0];
+          $(this)
+            .find('.js-message_photo')
+            .each(async function () {
+              messageObject.picture.push($(this).attr('style').split("('")[1].split("'")[0]);
+            });
         } catch (e) {}
 
         try {
-          messageObject.video = $(this).find('.tgme_widget_message_video').attr('src');
+          const image = $(this).find('.tgme_widget_message_photo_wrap').attr('style').split("('")[1].split("'")[0];
+          if (image) {
+            messageObject.picture.push(image);
+          }
+        } catch (e) {}
+
+        try {
+          const video = $(this).find('.tgme_widget_message_video').attr('src');
+          if (video) {
+            messageObject.video.push(video);
+          }
         } catch (e) {}
 
         try {

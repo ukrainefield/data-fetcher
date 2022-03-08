@@ -49,15 +49,23 @@ async function postTelegramMessage(message, forceSend = false) {
 async function addMediaToTelegramMessage(messageObject) {
   try {
     if (messageObject.picture) {
-      let tries = 0;
-      const fileName = `${messageObject.messageId.split('/')[0]}-${messageObject.messageId.split('/')[1]}-image.jpg`;
-      let result = await fileUpload.downloadAndUpload(messageObject.picture, fileName, 'picture');
-      while (!result && ++tries < UPLOAD_TRIES) {
-        result = await fileUpload.downloadAndUpload(messageObject.picture, fileName, 'picture');
-      }
-      if (result) {
-        messageObject.picture = result.Location;
-      }
+      let results = [];
+      messageObject.picture.map(async (picture, index) => {
+        try {
+          let tries = 0;
+          const fileName = `${messageObject.messageId.split('/')[0]}-${messageObject.messageId.split('/')[1]}-image-${index}.jpg`;
+          let result = await fileUpload.downloadAndUpload(picture, fileName, 'picture');
+          while (!result && ++tries < UPLOAD_TRIES) {
+            result = await fileUpload.downloadAndUpload(picture, fileName, 'picture');
+          }
+          if (result) {
+            results.push(result.Location);
+          }
+        } catch (e) {
+          log.error(e);
+        }
+      });
+      messageObject.picture = results;
     }
   } catch (e) {
     log.info(e);
@@ -65,18 +73,26 @@ async function addMediaToTelegramMessage(messageObject) {
 
   try {
     if (messageObject.video) {
-      const fileName = `${messageObject.messageId.split('/')[0]}-${messageObject.messageId.split('/')[1]}-video.mp4`;
-      let tries = 0;
-      let result = await fileUpload.downloadAndUpload(messageObject.video, fileName, 'video');
-      while (!result && ++tries < UPLOAD_TRIES) {
-        result = await fileUpload.downloadAndUpload(messageObject.video, fileName, 'video');
-      }
-      if (result) {
-        messageObject.video = result.Location;
-      }
+      let results = [];
+      messageObject.video.map(async (video, index) => {
+        try {
+          const fileName = `${messageObject.messageId.split('/')[0]}-${messageObject.messageId.split('/')[1]}-video-${index}.mp4`;
+          let tries = 0;
+          let result = await fileUpload.downloadAndUpload(video, fileName, 'video');
+          while (!result && ++tries < UPLOAD_TRIES) {
+            result = await fileUpload.downloadAndUpload(video, fileName, 'video');
+          }
+          if (result) {
+            results.push(result.Location);
+          }
+        } catch (e) {
+          log.error(e);
+        }
+      });
+      messageObject.video = results;
     }
   } catch (e) {
-    log.info(e);
+    log.error(e);
   }
   return messageObject;
 }
