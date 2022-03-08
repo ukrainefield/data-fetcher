@@ -44,9 +44,11 @@ module.exports = {
         } catch (e) {}
 
         try {
-          const image = $(this).find('.tgme_widget_message_photo_wrap').attr('style').split("('")[1].split("'")[0];
-          if (image) {
-            messageObject.picture.push(image);
+          if (messageObject.picture.length == 0) {
+            const image = $(this).find('.tgme_widget_message_photo_wrap').attr('style').split("('")[1].split("'")[0];
+            if (image) {
+              messageObject.picture.push(image);
+            }
           }
         } catch (e) {}
 
