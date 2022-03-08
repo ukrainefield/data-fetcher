@@ -53,6 +53,22 @@
       "onlyPostWithMedia": false,
       "categories": ["trustable", "verified", "ukraine"],
       "shouldTranslate": false
+    },
+    {
+      "userID": "732521058507620356",
+      "username": "Ukraine",
+      "friendlyName": "🇺🇦 Ukraine / Україна",
+      "onlyPostWithMedia": false,
+      "categories": ["trustable", "verified", "ukraine"],
+      "shouldTranslate": false
+    },
+    {
+      "userID": "4012126155",
+      "username": "GeneralStaffUA",
+      "friendlyName": "🇺🇦 General Staff of the Armed Forces",
+      "onlyPostWithMedia": false,
+      "categories": ["trustable", "verified", "ukraine"],
+      "shouldTranslate": true
     }
   ],
   "TELEGRAM_CHANNELS": [
@@ -67,6 +83,13 @@
       "channelURL": "https://t.me/s/trtnarusskom",
       "friendlyName": "🇺🇦 TRT",
       "username": "trtnarusskom",
+      "categories": ["trustable", "ukraine"],
+      "shouldTranslate": true
+    },
+    {
+      "channelURL": "https://t.me/s/a_shtirlitz",
+      "friendlyName": "🇺🇦 Anatoly Stirlitz",
+      "username": "a_shtirlitz",
       "categories": ["trustable", "ukraine"],
       "shouldTranslate": true
     }
