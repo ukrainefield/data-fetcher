@@ -5,6 +5,7 @@ const telegramPostModel = require('../Models/telegramPostModel');
 const reutersMapModel = require('../Models/reutersMapModel');
 const fileUpload = require('../Helpers/fileUploader');
 const { UPLOAD_TRIES } = require('../consts.json');
+const translator = require('../Helpers/translator');
 const fs = require('fs');
 
 async function postReutersMap(message, forceSend = false) {
@@ -31,6 +32,9 @@ async function postTwitterMessage(message, forceSend = false) {
     }
   }
   log.info(`Recieved Twitter message: ${message.tweetID} by: ${message.authorUsername}`);
+  if (message.shouldTranslate) {
+    message.full_text = await translator.translateText(message.full_text);
+  }
   databasePost.postTwitterMessageToDatabase(message);
 }
 
@@ -43,6 +47,9 @@ async function postTelegramMessage(message, forceSend = false) {
   }
   message = await addMediaToTelegramMessage(message);
   log.info(`Recieved Telegram message: ${message.messageId} by: ${message.user}`);
+  if (message.shouldTranslate) {
+    message.text = await translator.translateText(message.text);
+  }
   databasePost.postTelegramMessageToDatabase(message);
 }
 

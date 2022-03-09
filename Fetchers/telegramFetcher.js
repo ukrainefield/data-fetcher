@@ -3,7 +3,6 @@ const cheerio = require('cheerio');
 const axios = require('axios').default;
 const { TELEGRAM_CHANNELS, MEDIA_DIR } = require('../consts');
 const postMessage = require('../MessagePost/postMessage');
-const translator = require('../Helpers/translator');
 const fs = require('fs');
 
 module.exports = {
@@ -25,13 +24,14 @@ module.exports = {
           authorName: $(this).find('.tgme_widget_message_owner_name').find('span').text(),
           picture: [],
           video: [],
-          text: channel.shouldTranslate ? await translator.translateText(MessageText) : MessageText,
+          text: MessageText,
           messageId: $(this).attr('data-post'),
           messageURL: '',
           time: $(this).find('.time').attr('datetime'),
           epochTime: '',
           categories: channel.categories,
           friendlyName: channel.friendlyName,
+          shouldTranslate: channel.shouldTranslate,
         };
         messageObject.messageURL = `https://t.me/${messageObject.messageId}/`;
 
