@@ -69,6 +69,14 @@
       "onlyPostWithMedia": false,
       "categories": ["trustable", "verified", "ukraine"],
       "shouldTranslate": true
+    },
+    {
+      "userID": "630995607",
+      "username": "DefenceU",
+      "friendlyName": "🇺🇦 Defence of Ukraine",
+      "onlyPostWithMedia": false,
+      "categories": ["trustable", "verified", "ukraine"],
+      "shouldTranslate": true
     }
   ],
   "TELEGRAM_CHANNELS": [
