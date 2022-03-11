@@ -19,6 +19,7 @@ module.exports = {
 
         for await (const tweet of timeline) {
           if (profile.onlyPostWithMedia && !hasMedia(tweet)) continue;
+          if (!profile.allowRetweets && tweet.retweeted) continue;
           //Don't fetch tweets that are older than 5 days
           const tweetEpoch = new Date(tweet.created_at).getTime() / 1000;
           if (currentEpoch - tweetEpoch > 60 * 60 * 24 * 5) continue;

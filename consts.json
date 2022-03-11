@@ -12,7 +12,8 @@
       "friendlyName": "🇺🇦 Ukraine Weapons Tracker",
       "onlyPostWithMedia": true,
       "categories": ["trustable", "ukraine"],
-      "shouldTranslate": false
+      "shouldTranslate": false,
+      "allowRetweets": true
     },
     {
       "userID": "1891490382",
@@ -20,7 +21,8 @@
       "friendlyName": "🇺🇦 NEXTA",
       "onlyPostWithMedia": false,
       "categories": ["trustable", "verified", "ukraine"],
-      "shouldTranslate": false
+      "shouldTranslate": false,
+      "allowRetweets": true
     },
     {
       "userID": "1496784000773459971",
@@ -28,7 +30,8 @@
       "friendlyName": "🇺🇦 Verified Live Updates",
       "onlyPostWithMedia": true,
       "categories": ["trustable", "verified", "ukraine"],
-      "shouldTranslate": false
+      "shouldTranslate": false,
+      "allowRetweets": true
     },
     {
       "userID": "1120633726478823425",
@@ -36,7 +39,8 @@
       "friendlyName": "🇺🇦 Zelensky",
       "onlyPostWithMedia": false,
       "categories": ["trustable", "verified", "ukraine"],
-      "shouldTranslate": true
+      "shouldTranslate": true,
+      "allowRetweets": true
     },
     {
       "userID": "1462548977367359490",
@@ -44,7 +48,8 @@
       "friendlyName": "🇺🇦 The Kyiv Independent",
       "onlyPostWithMedia": false,
       "categories": ["trustable", "verified", "ukraine"],
-      "shouldTranslate": false
+      "shouldTranslate": false,
+      "allowRetweets": true
     },
     {
       "userID": "14106476",
@@ -52,7 +57,8 @@
       "friendlyName": "🇺🇦 KyivPost",
       "onlyPostWithMedia": false,
       "categories": ["trustable", "verified", "ukraine"],
-      "shouldTranslate": false
+      "shouldTranslate": false,
+      "allowRetweets": true
     },
     {
       "userID": "732521058507620356",
@@ -60,7 +66,8 @@
       "friendlyName": "🇺🇦 Ukraine / Україна",
       "onlyPostWithMedia": false,
       "categories": ["trustable", "verified", "ukraine"],
-      "shouldTranslate": false
+      "shouldTranslate": false,
+      "allowRetweets": true
     },
     {
       "userID": "4012126155",
@@ -68,7 +75,8 @@
       "friendlyName": "🇺🇦 General Staff of the Armed Forces",
       "onlyPostWithMedia": false,
       "categories": ["trustable", "verified", "ukraine"],
-      "shouldTranslate": true
+      "shouldTranslate": true,
+      "allowRetweets": true
     },
     {
       "userID": "630995607",
@@ -76,7 +84,8 @@
       "friendlyName": "🇺🇦 Defence of Ukraine",
       "onlyPostWithMedia": false,
       "categories": ["trustable", "verified", "ukraine"],
-      "shouldTranslate": true
+      "shouldTranslate": true,
+      "allowRetweets": true
     }
   ],
   "TELEGRAM_CHANNELS": [
