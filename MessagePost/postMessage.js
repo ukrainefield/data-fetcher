@@ -2,6 +2,7 @@ const databasePost = require('./postWorkers/databasePost');
 const log = require('fancy-log');
 const twitterPostModel = require('../Models/twitterPostModel');
 const telegramPostModel = require('../Models/telegramPostModel');
+const redditPostModel = require('../Models/redditPostModel');
 const reutersMapModel = require('../Models/reutersMapModel');
 const fileUpload = require('../Helpers/fileUploader');
 const { UPLOAD_TRIES } = require('../consts.json');
@@ -22,6 +23,20 @@ async function postReutersMap(message, forceSend = false) {
   const uploadData = await fileUpload.uploadFile(message.imagePath, message.fileName, 'reutersMap');
   message.imagePath = uploadData.Location;
   databasePost.postReutersMapToDatabase(message);
+}
+
+async function postRedditMessage(message, forceSend = false) {
+  if (!forceSend) {
+    let existingPost = await redditPostModel.findOne({ postId: message.postId });
+    if (existingPost) {
+      return;
+    }
+  }
+  log.info(`Recieved Reddit message: ${message.postId} by: ${message.authorUsername}`);
+  if (message.shouldTranslate) {
+    message.full_text = await translator.translateText(message.full_text);
+  }
+  databasePost.postRedditMessageToDatabase(message);
 }
 
 async function postTwitterMessage(message, forceSend = false) {
@@ -106,4 +121,4 @@ async function addMediaToTelegramMessage(messageObject) {
   return messageObject;
 }
 
-module.exports = { postTwitterMessage, postTelegramMessage, postReutersMap };
+module.exports = { postTwitterMessage, postTelegramMessage, postRedditMessage, postReutersMap };

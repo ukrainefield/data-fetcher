@@ -91,7 +91,7 @@
   "TELEGRAM_CHANNELS": [
     {
       "channelURL": "https://t.me/s/insiderUKR",
-      "friendlyName": "🇺🇦 Insider Ukraine ",
+      "friendlyName": "🇺🇦 Insider Ukraine",
       "username": "insiderUKR",
       "categories": ["trustable", "ukraine"],
       "shouldTranslate": true
@@ -123,6 +123,16 @@
       "username": "donbassr",
       "categories": ["russia", "propaganda"],
       "shouldTranslate": true
+    }
+  ],
+  "REDDIT_CHANNELS": [
+    {
+      "channelURL": "https://www.reddit.com/r/UkraineWarVideoReport/",
+      "friendlyName": "🇺🇦 UkraineWarVideoReport",
+      "username": "UkraineWarVideoReport",
+      "categories": ["trustable", "ukraine"],
+      "shouldTranslate": false,
+      "onlyPostWithMedia": true
     }
   ]
 }

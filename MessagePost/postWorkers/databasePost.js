@@ -2,6 +2,24 @@ const log = require('fancy-log');
 const twitterPostModel = require('../../Models/twitterPostModel');
 const telegramPostModel = require('../../Models/telegramPostModel');
 const reutersMapModel = require('../../Models/reutersMapModel');
+const redditPostModel = require('../../Models/redditPostModel');
+
+
+async function postRedditMessageToDatabase(){
+  log.info(`Posting Reddit message: ${message.postId} by: ${message.authorUsername} to database`);
+  const newPost = new redditPostModel();
+  newPost.created_at = message.created_at;
+  newPost.postId = message.postId;
+  newPost.postUrl = message.postUrl;
+  newPost.full_text = message.full_text;
+  newPost.images = message.images;
+  newPost.videos = message.videos;
+  newPost.authorUsername = message.authorUsername;
+  newPost.categories = message.categories;
+  newPost.epochTime = message.epochTime;
+  await newPost.save();
+  log.info(`Posted message: ${message.postId} to database`);
+}
 
 async function postTwitterMessageToDatabase(message) {
   log.info(`Posting Tweet message: ${message.tweetID} by ${message.authorUsername} to database`);
@@ -51,4 +69,4 @@ async function postReutersMapToDatabase(message) {
   log.info(`Posted Reuters map: ${message.displayUpdatedTime} to database`);
 }
 
-module.exports = { postTwitterMessageToDatabase, postTelegramMessageToDatabase, postReutersMapToDatabase };
+module.exports = { postTwitterMessageToDatabase, postTelegramMessageToDatabase, postReutersMapToDatabase, postRedditMessageToDatabase };
