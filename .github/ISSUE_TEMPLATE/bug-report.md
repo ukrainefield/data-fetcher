@@ -24,7 +24,6 @@ assignees: ''
 
 **Android version:**
 
-
 ## Screenshots or videos
 
 <details>

@@ -109,6 +109,20 @@
       "username": "a_shtirlitz",
       "categories": ["trustable", "ukraine"],
       "shouldTranslate": true
+    },
+    {
+      "channelURL": "https://t.me/s/grey_zone",
+      "friendlyName": "🇷🇺 Grey Zone",
+      "username": "grey_zone",
+      "categories": ["russia", "propaganda"],
+      "shouldTranslate": true
+    },
+    {
+      "channelURL": "https://t.me/s/donbassr/",
+      "friendlyName": "🇷🇺 Donbass Decides",
+      "username": "donbassr",
+      "categories": ["russia", "propaganda"],
+      "shouldTranslate": true
     }
   ]
 }
