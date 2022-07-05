@@ -111,6 +111,20 @@
       "shouldTranslate": true
     },
     {
+      "channelURL": "https://t.me/s/horevica",
+      "friendlyName": "🇺🇦 Sofa Assault Brigade",
+      "username": "horevica",
+      "categories": ["trustable", "ukraine"],
+      "shouldTranslate": true
+    },
+    {
+      "channelURL": "https://t.me/s/combat_ftg",
+      "friendlyName": "🇺🇦 Combat Footage",
+      "username": "combat_ftg",
+      "categories": ["trustable", "ukraine"],
+      "shouldTranslate": true
+    },
+    {
       "channelURL": "https://t.me/s/grey_zone",
       "friendlyName": "🇷🇺 Grey Zone",
       "username": "grey_zone",
