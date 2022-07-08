@@ -137,6 +137,13 @@
       "username": "donbassr",
       "categories": ["russia", "propaganda"],
       "shouldTranslate": true
+    },
+    {
+      "channelURL": "https://t.me/s/milinfolive/",
+      "friendlyName": "🇷🇺 Military Informant",
+      "username": "milinfolive",
+      "categories": ["russia", "propaganda"],
+      "shouldTranslate": true
     }
   ]
 }
